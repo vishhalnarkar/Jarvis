@@ -12,6 +12,11 @@ GEMINI_API_URL = os.getenv("GEMINI_API_URL", "https://generativelanguage.googlea
 if not GEMINI_API:
     raise ValueError("GEMINI_API_KEY is not set in the environment variables.")
 
-# print(GEMINI_API)
-# print(GEMINI_API_URL)
-print("Import Successful.")
+client = genai.Client()
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="Explain the concept of AI in a single sentence.",
+)
+
+print("Sent Request to Gemini API:\n")
+print(response)
