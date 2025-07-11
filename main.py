@@ -5,6 +5,12 @@ from dotenv import load_dotenv
 from google import genai 
 # For Text-to-Speech
 import pyttsx3
+# For Speech-to-Text
+import queue
+import json
+import sounddevice as sd
+from vosk import Model, KaldiRecognizer
+
 
 # Ensure you have a .env file with GEMINI_API_KEY and optionally GEMINI_API_URL
 
@@ -50,5 +56,12 @@ def say(text):
     engine.say(text)
     engine.runAndWait()
     print("End response...\n")
+
+def audio_callback(indata, frames, time, status):
+    if status:
+        print(f"Audio input status: {status}")
+    audio_queue.put(bytes(indata))
+
+
 
 say(RequestGeminiAPI("I infact am, channeling Walter White, I am the one who knocks!"))
