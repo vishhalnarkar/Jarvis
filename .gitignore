@@ -1,3 +1,5 @@
 # Environment File (API keys and sensitive data)
 .env
 models
+__pycache__
+tempCodeRunnerFile.py
