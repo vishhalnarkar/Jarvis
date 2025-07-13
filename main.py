@@ -10,6 +10,8 @@ import queue
 import json
 import sounddevice as sd
 from vosk import Model, KaldiRecognizer
+# Open websites in browser
+import webbrowser
 
 
 # Ensure you have a .env file with GEMINI_API_KEY and optionally GEMINI_API_URL
@@ -44,6 +46,17 @@ recognizer.SetWords(True)
 
 # Queue for audio input
 audio_queue = queue.Queue()
+
+# Mapping of website names to URLs
+website_map = {
+    "youtube": "https://www.youtube.com",
+    "chatgpt": "https://chat.openai.com",
+    "google": "https://www.google.com",
+    "twitter": "https://twitter.com",
+    "github": "https://github.com",
+    "gmail": "https://mail.google.com",
+    "stackoverflow": "https://stackoverflow.com",
+}
 
 # Function to request Gemini API and handle the response
 def RequestGeminiAPI(prompt):
@@ -99,4 +112,17 @@ def listen(timeout: int = 5) -> str:
     print(f"Recognized Text: {result_text}\n")
     return result_text.strip()
 
-say(listen(timeout=5))
+def open_website(command: str):
+    if not command:
+        raise ValueError("Command is empty. Cannot search for websites.")
+    command = command.lower()
+    for keyword, url in website_map.items():
+        if keyword in command:
+            say(f"Opening {keyword.capitalize()}...")
+            print(f"Opening website: {url}\n")
+            webbrowser.open(url)
+            return
+    say("Sorry, I don't recognize that website.")
+
+# say(listen(timeout=5))
+open_website(listen(timeout=5))
