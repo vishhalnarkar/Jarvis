@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 # For Gemini API
 from google import genai 
 
+# Lazy initialization of the Gemini client
 client = None
 
 # Inilialize the Gemini client
@@ -27,7 +28,7 @@ def init_gemini_client():
         raise ValueError("GEMINI_API_KEY is not set in the environment variables.")
     
     # Set API Key
-    print("Environment Variables Loaded Successfully.\n")
+    print("Environment Variables Loaded Successfully.")
     client = genai.Client(api_key=GEMINI_API)
     print("Initialized Gemini Client...\n")
     
@@ -53,9 +54,8 @@ def RequestGeminiAPI(prompt):
     )
     
     # Print the response
-    print("Sent Request to Gemini API:\nResponse:\n")
+    print("Sent Request to Gemini API:\nResponse:")
     print(response.text)
-    
     # Validate that the response is not empty
     if not response.text:   
         raise ValueError("No text response received from the Gemini API.")

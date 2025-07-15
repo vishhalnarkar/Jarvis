@@ -5,5 +5,5 @@ from features.web_open import open_website
 
 # Testing After Organizing the Code
 if __name__ == "__main__":
-    say(gemini.RequestGeminiAPI("What is the capital of India ?"))
-    open_website(online_listen())
+    while True:
+        open_website(online_listen())

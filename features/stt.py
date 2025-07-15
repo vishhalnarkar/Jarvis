@@ -73,6 +73,7 @@ def online_listen():
             print("Listening...")
             google_recognizer.adjust_for_ambient_noise(source) 
             audio = google_recognizer.listen(source)
+            print(audio)
             return google_recognizer.recognize_google(audio)
         except sr.UnknownValueError:
             print("Google Speech Recognition could not understand audio")

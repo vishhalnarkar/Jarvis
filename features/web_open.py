@@ -28,6 +28,7 @@ website_map = {
     "netflix": "https://www.netflix.com",
     "quora": "https://www.quora.com",
     "wikipedia": "https://www.wikipedia.org",
+    "pinterest": "https://www.pinterest.com",
 }
 
 # Function to open a website based on the command

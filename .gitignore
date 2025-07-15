@@ -1,5 +1,7 @@
 # Environment File (API keys and sensitive data)
 .env
+# Vosk Model 
 models
+# Python Cache and Bytecode
 __pycache__
 tempCodeRunnerFile.py
