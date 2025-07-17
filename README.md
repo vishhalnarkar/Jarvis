@@ -9,7 +9,7 @@ sounddevice - Captures mic input in real-time
 webbrowser - Open Websites in Browser 
 SpeechRecognition - Online Speech to Text
 pyaudio - Speech Recognition needs it ig, throwing an error without it
-ss
+
 Command To Install 
 
 ```
