@@ -1,7 +1,11 @@
 # Open websites in browser
 import webbrowser
+
 # For Text-to-Speech
 from features.tts import say
+
+# To Check Internet Connection
+import socket
 
 # Mapping of website names to URLs
 website_map = {
@@ -43,3 +47,13 @@ def open_website(command: str):
             webbrowser.open(url)
             return
     say("Sorry, I don't recognize that website.")
+
+# Check if the internet connection is available
+def check_internet_connection(hosts="8.8.8.8", port=53, timeout=3):
+    try:
+        socket.create_connection((hosts, port), timeout)
+        print("Internet Available")
+        return True
+    except OSError:
+        print("Internet Not Available")
+        return False

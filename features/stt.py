@@ -10,6 +10,9 @@ import speech_recognition as sr
 # For Text-to-Speech
 from features.tts import say
 
+# To Check Internet Connection
+from features.online import check_internet_connection
+
 # Constants and global variables for Vosk model (initialized later)
 SAMPLE_RATE, BLOCK_SIZE, MODEL_PATH = 16000, 8000, "models/vosk-model-en-in-0.5"
 vosk_model, vosk_recognizer = None, None
@@ -38,6 +41,7 @@ def audio_callback(indata, frames, time, status):
 
 # Function to listen and convert voice to text using Vosk (Offline)
 def offline_listen(timeout: int = 5) -> str:
+    print("Using Offline Listner (Vosk)")
     # Ensure model is initialized before listening
     offline_stt_init()  
 
@@ -68,14 +72,22 @@ def offline_listen(timeout: int = 5) -> str:
 # Function to listen and convert voice to text using Google API (Online)
 google_recognizer = sr.Recognizer()  
 def online_listen():
+    print("Using Online Listner (Google)")
     with sr.Microphone() as source:
         try:
             print("Listening...")
             google_recognizer.adjust_for_ambient_noise(source) 
             audio = google_recognizer.listen(source)
-            print(audio)
+            print(google_recognizer.recognize_google(audio))
             return google_recognizer.recognize_google(audio)
         except sr.UnknownValueError:
             print("Google Speech Recognition could not understand audio")
         except sr.RequestError as e:
             print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+# Main function to listen based on internet connection
+def listen():
+    if check_internet_connection():
+        return online_listen()
+    else:
+        return offline_listen()
