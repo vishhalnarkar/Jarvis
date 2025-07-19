@@ -38,7 +38,8 @@ website_map = {
 # Function to open a website based on the command
 def open_website(command: str):
     if not command:
-        raise ValueError("Command is empty. Cannot search for websites.")
+        print("Command is empty. Cannot search for websites.")
+        return
     command = command.lower()
     for keyword, url in website_map.items():
         if keyword in command:
@@ -46,7 +47,19 @@ def open_website(command: str):
             print(f"Opening website: {url}\n")
             webbrowser.open(url)
             return
-    say("Sorry, I don't recognize that website.")
+    else:
+        print(f"Didn't find any relevant website for '{command}'.")
+        say(f"Didn't find any relevant website for '{command}'.")
+        google_search(command)
+
+# Function to perform a Google search      
+def google_search(query: str):
+    if not query:
+        print("Query is empty. Cannot perform Google search.")
+        return
+    say(f"Searching Google for {query}...")
+    print(f"Searching Google search for: {query}\n")
+    webbrowser.open("https://www.google.com/search?q=" + query)
 
 # Check if the internet connection is available
 def check_internet_connection(hosts="8.8.8.8", port=53, timeout=3):

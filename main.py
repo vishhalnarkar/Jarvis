@@ -7,8 +7,11 @@ from features import say
 from features import listen 
 # features/online.py
 from features import open_website 
+# features/online.py
+from features import google_search
 
-# Testing After Organizing the Code
+# Testing the Code after updates
 if __name__ == "__main__":
-    say(RequestGeminiAPI(listen()))
-    open_website(listen())
+    # say(RequestGeminiAPI(listen()))
+    open_website("weather today")
+    

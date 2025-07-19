@@ -5,3 +5,5 @@ models
 # Python Cache and Bytecode
 __pycache__
 tempCodeRunnerFile.py
+#Incomplete Files
+audio_visualizer.py
