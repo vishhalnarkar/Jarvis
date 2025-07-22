@@ -9,20 +9,15 @@ from features import listen
 from features import open_website 
 # features/online.py
 from features import google_search
+# features/desktop.py
+from features import open_app
 
 # Testing the Code after updates
 if __name__ == "__main__":
     # say(RequestGeminiAPI(listen()))
     # open_website("weather today")
     
-    sentence = "Open YouTube and search".lower()
-    if "open" in sentence:
-        open_website(sentence)
-    elif "search" in sentence:
-        google_search(sentence.replace("search", "").strip())
-    else:
-        print("No valid command found in the command.")
-        say("No valid command found in the command.")
+    open_app("visual studio code")
 
 '''
 open websites 
