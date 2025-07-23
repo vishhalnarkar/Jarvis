@@ -11,19 +11,14 @@ from features import open_website
 from features import google_search
 # features/desktop.py
 from features import open_app
+# features/desktop.py
+from features import index_shortcuts
+import os
 
 # Testing the Code after updates
 if __name__ == "__main__":
     # say(RequestGeminiAPI(listen()))
     # open_website("weather today")
-    
-    open_app("visual studio code")
-
-'''
-open websites 
-search google
-open desktop files 
-delete files
-open applications
-
-'''
+    start_menu = os.path.join(os.environ['APPDATA'], "Microsoft", "Windows", "Start Menu", "Programs")
+    output_csv = "features/shortcut_index.csv"
+    index_shortcuts(start_menu, output_csv)

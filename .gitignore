@@ -1,9 +1,15 @@
 # Environment File (API keys and sensitive data)
 .env
+
 # Vosk Model 
 models
+
 # Python Cache and Bytecode
 __pycache__
 tempCodeRunnerFile.py
-#Incomplete Files
+
+# Incomplete Files
 audio_visualizer.py
+
+# User Dependent Files
+shortcut_index.csv 
