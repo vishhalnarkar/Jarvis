@@ -55,26 +55,11 @@ def open_app(command: str):
 def resolve_shortcut(path_to_lnk: str) -> str:
     shell = win32com.client.Dispatch("WScript.Shell")
     shortcut = shell.CreateShortcut(path_to_lnk)
-    return shortcut.TargetPath
-
-# Cleans the CSV file
-def remove_empty_rows(file_path):
-
-    print("Cleaning File ...")
-    cleaned_rows = []
-
-    with open(file_path, mode='r', newline='', encoding='utf-8') as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if all(cell.strip() == '' for cell in row):
-                continue
-            cleaned_rows.append(row)
-
-    with open(file_path, mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
-        writer.writerows(cleaned_rows)
-
-    print(f"Cleaned file saved: {file_path}")
+    path = shortcut.TargetPath.lower()
+    if path.endswith(".exe") and "install" not in path and "uninstall" not in path and "unins" not in path:
+        print(f"Resolved shortcut: {path}")
+        return path
+    return None
 
 def index_shortcuts(root_folder: str, output_csv: str):
 
@@ -92,7 +77,10 @@ def index_shortcuts(root_folder: str, output_csv: str):
                 print(f"Warning: could not resolve {lnk_path}: {e}")
                 continue
 
-            exe_name = os.path.basename(target).strip()
+            # Only skip if exe_name is empty (i.e. basename was "")
+            if not target:
+                continue
+            exe_name = fname.replace(".lnk", ".exe")
             entries.append((exe_name, target))
 
     # write header + all found entries
@@ -100,6 +88,6 @@ def index_shortcuts(root_folder: str, output_csv: str):
         writer = csv.writer(f)
         writer.writerow(["filename", "path"])
         writer.writerows(entries)
-    remove_empty_rows(output_csv)
+
 
     

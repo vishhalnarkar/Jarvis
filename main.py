@@ -19,6 +19,10 @@ import os
 if __name__ == "__main__":
     # say(RequestGeminiAPI(listen()))
     # open_website("weather today")
+
     start_menu = os.path.join(os.environ['APPDATA'], "Microsoft", "Windows", "Start Menu", "Programs")
+    start = os.path.join(os.environ['ProgramData'], "Microsoft", "Windows", "Start Menu", "Programs")
     output_csv = "features/shortcut_index.csv"
-    index_shortcuts(start_menu, output_csv)
+    print(start_menu,"\n",start,"\n",output_csv)
+    index_shortcuts(start, output_csv)
+
