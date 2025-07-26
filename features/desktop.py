@@ -61,10 +61,16 @@ def resolve_shortcut(path_to_lnk: str) -> str:
         return path
     return None
 
-def index_shortcuts(root_folder: str, output_csv: str):
+def index_shortcuts(root_folder: str, output_csv: str)  -> None:
+    
+    seen = set()
+    if os.path.exists(output_csv) and os.path.getsize(output_csv) > 0:
+        with open(output_csv, newline="", encoding="utf-8") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                seen.add(row["path"].lower())
 
-    entries = []
-
+    new_entries = []
     for dirpath, _, filenames in os.walk(root_folder):
         for fname in filenames:
             if not fname.lower().endswith(".lnk"):
@@ -77,17 +83,24 @@ def index_shortcuts(root_folder: str, output_csv: str):
                 print(f"Warning: could not resolve {lnk_path}: {e}")
                 continue
 
-            # Only skip if exe_name is empty (i.e. basename was "")
-            if not target:
+            if not target or target in seen:
                 continue
-            exe_name = fname.replace(".lnk", ".exe")
-            entries.append((exe_name, target))
 
-    # write header + all found entries
-    with open(output_csv, "w", newline="", encoding="utf-8") as f:
+            exe_name = fname[:-4] + ".exe"
+            new_entries.append((exe_name, target))
+
+    if not new_entries:
+        print("No new shortcuts to index.")
+        return
+
+    write_header = not os.path.exists(output_csv) or os.path.getsize(output_csv) == 0
+    with open(output_csv, "a", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
-        writer.writerow(["filename", "path"])
-        writer.writerows(entries)
+        if write_header:
+            writer.writerow(["filename", "path"])
+        writer.writerows(new_entries)
+
+    print(f"Appended {len(new_entries)} new shortcuts to '{output_csv}'.")
 
 
     
