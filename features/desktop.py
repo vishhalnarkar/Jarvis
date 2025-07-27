@@ -1,3 +1,5 @@
+# TODO: GO through the code specially open_app and iterate_shortcuts, integrate them, to tired and confused to do it now.
+
 # To Search, Join Path, etc. 
 import os 
 # To Open Applications
@@ -35,21 +37,18 @@ desktop_apps = {
 }
 
 # To Open Desktop Applications
-def open_app(command: str):
-    if not command:
-        print("Command is empty. Cannot open applications.")
+def open_app(path: str):
+    if not path:
+        print("path is empty. Cannot open applications.")
         return
-    command = command.lower().replace("open ", "")
-    for keyword, app in desktop_apps.items():
-        if keyword in command:
-            try:
-                subprocess.Popen(app)
-                say(f"Opening {keyword.capitalize()}...")
-                print(f"Opening application: {keyword.capitalize()}...\n")
-            except Exception as e:
-                print(f"Failed to open {keyword}: {e}")
-                say(f"Failed to open {keyword}. Please check if it is installed or check path.")
-            return
+    try:
+        subprocess.Popen(path)
+        say(f"Opening {os.path.basename(path)}...")
+        print(f"Opening : {os.path.basename(path)}...\n")
+    except Exception as e:
+        print(f"Failed to open {path}: {e}")
+        say(f"Failed to open {os.path.basename(path)}.")
+    return
     
 # Takes shortcut (.lnk) file path and returns the target path (.exe)
 def resolve_shortcut(path_to_lnk: str) -> str:
@@ -102,5 +101,13 @@ def index_shortcuts(root_folder: str, output_csv: str)  -> None:
 
     print(f"Appended {len(new_entries)} new shortcuts to '{output_csv}'.")
 
-
-    
+def iterate_shortcuts(file: str, word: str):
+    with open(file, newline="", encoding="utf-8") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            if row["filename"].lower() == (word + ".exe").lower():
+                print(f"Found: {row["filename"]} at {row["path"]}")
+                say(f"Found {word}")
+                open_app(row["path"])
+                return
+            
