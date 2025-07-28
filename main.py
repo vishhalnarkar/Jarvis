@@ -11,9 +11,6 @@ from features import open_website
 from features import google_search
 # features/desktop.py
 from features import open_app
-# features/desktop.py
-from features import index_shortcuts, iterate_shortcuts
-import os
 
 # Testing the Code after updates
 if __name__ == "__main__":
@@ -25,6 +22,6 @@ if __name__ == "__main__":
     output_csv = "features/shortcut_index.csv"
     # print(start_menu,"\n",start,"\n",output_csv)
     # index_shortcuts(start, output_csv)
-    iterate_shortcuts(output_csv, "telegram")
+    open_app(output_csv, "task manager")
 
 
