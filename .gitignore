@@ -14,7 +14,5 @@ audio_visualizer.py
 # User Dependent Files
 shortcut_index.csv 
 
-# File Structure 
-
-Jarvis
-|
+# Extension Files
+.vscode/settings.json

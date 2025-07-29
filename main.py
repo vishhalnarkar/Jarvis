@@ -23,5 +23,3 @@ if __name__ == "__main__":
     # print(start_menu,"\n",start,"\n",output_csv)
     # index_shortcuts(start, output_csv)
     open_app(output_csv, "task manager")
-
-

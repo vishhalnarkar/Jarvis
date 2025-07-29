@@ -15,3 +15,20 @@ Command To Install
 ```
 pip install google-genai python-dotenv pyttsx3 vosk SpeechRecognition
 ```
+
+# File Structure 
+
+Jarvis
+|- main.py
+|- features
+    |- __init__.py
+    |- desktop.py
+    |- online.py
+    |- stt.py
+    |- tts.py
+    |- shortcut_index.csv 
+|- models
+    |- vosk-model-small-en-us-0.15
+|- .gitignore
+|- .env
+|- README.md
