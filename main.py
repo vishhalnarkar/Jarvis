@@ -14,12 +14,12 @@ from features import open_app
 
 # Testing the Code after updates
 if __name__ == "__main__":
-    # say(RequestGeminiAPI(listen()))
-    # open_website("weather today")
-
-    # start_menu = os.path.join(os.environ['APPDATA'], "Microsoft", "Windows", "Start Menu", "Programs")
-    # start = os.path.join(os.environ['ProgramData'], "Microsoft", "Windows", "Start Menu", "Programs")
-    output_csv = "features/shortcut_index.csv"
-    # print(start_menu,"\n",start,"\n",output_csv)
-    # index_shortcuts(start, output_csv)
-    open_app(output_csv, "task manager")
+    while True:
+        say("Hello, How may I assist you?")
+        command = listen()
+        if "open" in command:
+            open_app(command.replace("open ", ""))
+        elif "search" in command:
+            google_search(command.replace("search ", ""))
+        elif "exit" in command:
+            break

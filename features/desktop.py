@@ -13,18 +13,23 @@ import win32com.client
 
 
 # To Open Desktop Applications
-def open_app(file: str, word: str):
+def open_app(command: str):
+    file = "features/shortcut_index.csv"
     with open(file, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if row["filename"].lower() == (word + ".exe").lower():
+            if row["filename"].lower() == (command + ".exe").lower():
                 try:
                     subprocess.Popen(row["path"])
-                    say(f"Opening {word}...")
+                    say(f"Opening {command}...")
                     print(f"Opening : {os.path.basename(row["path"])}...\n")
                 except Exception as e:
                     print(f"Failed to open {row["path"]}: {e}")
-                    say(f"Failed to open {word}.")
+                    say(f"Failed to open {command}.")
+                return
+            else:
+                print(f"'{command}' not found in shortcuts.")
+                say(f"'{command}' not found in shortcuts.")
                 return
 
 # Takes shortcut (.lnk) file path and returns the target path (.exe)
