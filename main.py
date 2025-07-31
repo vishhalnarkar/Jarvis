@@ -18,7 +18,10 @@ if __name__ == "__main__":
         say("Hello, How may I assist you?")
         command = listen()
         if "open" in command:
-            open_app(command.replace("open ", ""))
+            if "website" in command:
+                open_website(command.replace("open website ", ""))
+            else:
+                open_app(command.replace("open ", ""))
         elif "search" in command:
             google_search(command.replace("search ", ""))
         elif "exit" in command:
