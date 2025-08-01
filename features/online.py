@@ -37,9 +37,6 @@ website_map = {
 
 # Function to open a website based on the command
 def open_website(command: str):
-    if not command:
-        print("Command is empty. Cannot search for websites.")
-        return
     command = command.lower()
     for keyword, url in website_map.items():
         if keyword in command:
