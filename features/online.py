@@ -47,16 +47,20 @@ def open_website(command: str):
     else:
         print(f"Didn't find any relevant website for '{command}'.")
         say(f"Didn't find any relevant website for '{command}'.")
-        google_search(command)
+        search(command)
 
-# Function to perform a Google search      
-def google_search(query: str):
-    if not query:
-        print("Query is empty. Cannot perform Google search.")
+# Function to perform a Google search    
+# TODO: Add support for other searches.  
+def search(query: str):
+    if "youtube" in query:
+        say(f"Searching Youtube for {query}...")
+        print(f"Searching Youtube search for: {query}\n")
+        webbrowser.open("https://www.youtube.com/results?search_query=" + query)
         return
-    say(f"Searching Google for {query}...")
-    print(f"Searching Google search for: {query}\n")
-    webbrowser.open("https://www.google.com/search?q=" + query)
+    else:
+        say(f"Searching Google for {query}...")
+        print(f"Searching Google search for: {query}\n")
+        webbrowser.open("https://www.google.com/search?q=" + query)
 
 # Check if the internet connection is available
 def check_internet_connection(hosts="8.8.8.8", port=53, timeout=3):
