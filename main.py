@@ -8,7 +8,7 @@ from features import listen
 # features/online.py
 from features import open_website 
 # features/online.py
-from features import google_search
+from features import search
 # features/desktop.py
 from features import open_app
 
@@ -23,6 +23,6 @@ if __name__ == "__main__":
             else:
                 open_app(command.replace("open ", ""))
         elif "search" in command:
-            google_search(command.replace("search ", ""))
+            search(command.replace("search ", "").lower())
         elif "exit" in command:
             break

@@ -53,6 +53,7 @@ def open_website(command: str):
 # TODO: Add support for other searches.  
 def search(query: str):
     if "youtube" in query:
+        query = query.replace("youtube", "").strip()
         say(f"Searching Youtube for {query}...")
         print(f"Searching Youtube search for: {query}\n")
         webbrowser.open("https://www.youtube.com/results?search_query=" + query)
