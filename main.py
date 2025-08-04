@@ -12,17 +12,18 @@ from features import search
 # features/desktop.py
 from features import open_app
 
-# Testing the Code after updates
+# TODO: Not Saying "Opening" when opening apps & Websites, likely a problem in online.py.
 if __name__ == "__main__":
     while True:
         say("Hello, How may I assist you?")
         command = listen()
-        if "open" in command:
-            if "website" in command:
-                open_website(command.replace("open website ", ""))
-            else:
-                open_app(command.replace("open ", ""))
-        elif "search" in command:
-            search(command.replace("search ", "").lower())
-        elif "exit" in command:
-            break
+        if command:
+            if "open" in command:
+                if "website" in command:
+                    open_website(command.replace("open website ", ""))
+                else:
+                    open_app(command.replace("open ", ""))
+            elif "search" in command:
+                search(command.replace("search ", "").lower())
+            elif "close" in command:
+                break
