@@ -10,6 +10,8 @@ from features.tts import say
 import csv
 # To resolve Windows shortcuts
 import win32com.client
+# To listen to commands
+from features.stt import listen
 
 
 # To Open Desktop Applications
@@ -82,3 +84,19 @@ def index_shortcuts(root_folder: str, output_csv: str)  -> None:
         writer.writerows(new_entries)
 
     print(f"Appended {len(new_entries)} new shortcuts to '{output_csv}'.")
+    
+def clean_pc(): 
+    temp_dirs = [
+        os.path.join(os.environ["TEMP"]),
+        os.path.join(os.environ.get("SystemRoot", "C:\\Windows"), "Temp")
+    ]
+    say("Deleting temporary files, waiting for confirmation...")
+    command = listen()
+    if "do" or "go" or "yes" or "confirm" in command.lower():
+        # TODO: Deleting files logic
+        print("Cleaning up temporary files...")
+        return
+    else:
+        print("Cleaning cancelled")
+        say("Cleaning cancelled")
+        return

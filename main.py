@@ -10,20 +10,24 @@ from features import open_website
 # features/online.py
 from features import search
 # features/desktop.py
-from features import open_app
+from features import open_app, clean_pc
 
 # TODO: Not Saying "Opening" when opening apps & Websites, likely a problem in online.py.
 if __name__ == "__main__":
-    while True:
-        say("Hello, How may I assist you?")
-        command = listen()
-        if command:
-            if "open" in command:
-                if "website" in command:
-                    open_website(command.replace("open website ", ""))
-                else:
-                    open_app(command.replace("open ", ""))
-            elif "search" in command:
-                search(command.replace("search ", "").lower())
-            elif "close" in command:
-                break
+    clean_pc()
+    # while True:
+    #     say("Hello, How may I assist you?")
+    #     command = listen()
+    #     if command:
+    #         if "open" in command:
+    #             if "website" in command:
+    #                 open_website(command.replace("open website ", ""))
+    #             else:
+    #                 open_app(command.replace("open ", ""))
+    #         elif "search" in command:
+    #             search(command.replace("search ", "").lower())
+    #         elif "clean" in command:
+    #             say("Cleaning up the system.")
+    #             open_app("cleaner")
+    #         elif "shut down" in command:
+    #             break
