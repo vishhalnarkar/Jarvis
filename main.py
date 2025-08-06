@@ -11,10 +11,14 @@ from features import open_website
 from features import search
 # features/desktop.py
 from features import open_app, clean_pc
+import os
 
 # TODO: Not Saying "Opening" when opening apps & Websites, likely a problem in online.py.
 if __name__ == "__main__":
-    clean_pc()
+    # clean_pc()
+    path = ""
+    print(path)
+    os.rmdir(path)
     # while True:
     #     say("Hello, How may I assist you?")
     #     command = listen()

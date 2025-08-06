@@ -87,14 +87,16 @@ def index_shortcuts(root_folder: str, output_csv: str)  -> None:
     
 def clean_pc(): 
     temp_dirs = [
-        os.path.join(os.environ["TEMP"]),
-        os.path.join(os.environ.get("SystemRoot", "C:\\Windows"), "Temp")
+        # "",
+        # os.path.join(os.environ["TEMP"]),
+        # os.path.join(os.environ.get("SystemRoot", "C:\\Windows"), "Temp")
     ]
     say("Deleting temporary files, waiting for confirmation...")
     command = listen()
     if "do" or "go" or "yes" or "confirm" in command.lower():
         # TODO: Deleting files logic
         print("Cleaning up temporary files...")
+        os.rmdir(temp_dirs[0])
         return
     else:
         print("Cleaning cancelled")
